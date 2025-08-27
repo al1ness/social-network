@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
+            $table->unsignedSmallInteger('status')->default(0); //private or group
             $table->timestamps();
         });
     }

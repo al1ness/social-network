@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('follows', function (Blueprint $table) {
+        Schema::create('chat_users', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('follower_id')
-                ->constrained(table: 'users')
+            $table->foreignId('chat_id')
+                ->constrained(table: 'chats')
                 ->onDelete('cascade');
 
-            $table->foreignId('following_id')
+            $table->foreignId('user_id')
                 ->constrained(table: 'users')
                 ->onDelete('cascade');
 
             $table->timestamps();
-            $table->unique(['follower_id', 'following_id']);
+            $table->unique(['chat_id', 'user_id']);
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('follows');
+        Schema::dropIfExists('chat_user');
     }
 };

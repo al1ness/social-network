@@ -13,7 +13,21 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+
+            //$table->foreignId('user_id')
+               // ->constrained(table: 'users')
+                //->onDelete('cascade');
+
+            $table->text('title');
+            $table->string('image_url')->nullable();
+            $table->string('video_url')->nullable();
+            $table->text('body')->nullable();
+            $table->dateTime('published_at')->nullable();
+            $table->unsignedBigInteger('views')->default(0);
+            $table->unsignedSmallInteger('status')->default(0);
             $table->timestamps();
+
+            $table->index('published_at');
         });
     }
 
