@@ -4,47 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Tag\StoreTagRequest;
 use App\Http\Requests\Tag\UpdateTagRequest;
+use App\Http\Resources\Tag\TagResource;
 use App\Models\Tag;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class TagController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(): array
     {
-        //
+        return TagResource::collection(Tag::all())->resolve();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreTagRequest $request)
+    public function store(): JsonResponse
     {
-        //
+        Tag::create([
+            'title' => 'MostPopularTag',
+            'slug' => 'most_popular_tag'
+        ]);
+
+        return response()->json([
+            'message' => 'Tag created'
+        ], Response::HTTP_OK);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Tag $tag)
     {
-        //
+        return TagResource::make($tag)->resolve();
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateTagRequest $request, Tag $tag)
+    public function update(Tag $tag)
     {
-        //
+        $tag->update([
+            'title' => 'TopTag',
+            'slug' => 'top_tag'
+        ]);
+
+        return TagResource::make($tag)->resolve();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+
+        return response()->json([
+            'message' => 'Tag deleted'
+        ], Response::HTTP_OK);
     }
 }
