@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Follow\StoreFollowRequest;
 use App\Http\Requests\Follow\UpdateFollowRequest;
 use App\Models\Follow;
