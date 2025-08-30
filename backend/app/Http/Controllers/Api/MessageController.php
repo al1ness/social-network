@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Message\StoreMessageRequest;
-use App\Http\Requests\Message\UpdateMessageRequest;
+use App\Http\Requests\Message\StoreRequest;
+use App\Http\Requests\Message\UpdateRequest;
 use App\Models\Message;
 
 class MessageController extends Controller
@@ -14,7 +14,7 @@ class MessageController extends Controller
         //
     }
 
-    public function store(StoreMessageRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -24,7 +24,7 @@ class MessageController extends Controller
         //
     }
 
-    public function update(UpdateMessageRequest $request, Message $message)
+    public function update(UpdateRequest $request, Message $message)
     {
         //
     }

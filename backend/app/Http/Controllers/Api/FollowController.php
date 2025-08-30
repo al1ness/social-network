@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Follow\StoreFollowRequest;
-use App\Http\Requests\Follow\UpdateFollowRequest;
+use App\Http\Requests\Follow\StoreRequest;
+use App\Http\Requests\Follow\UpdateRequest;
 use App\Models\Follow;
 
 class FollowController extends Controller
@@ -14,7 +14,7 @@ class FollowController extends Controller
         //
     }
 
-    public function store(StoreFollowRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -24,7 +24,7 @@ class FollowController extends Controller
         //
     }
 
-    public function update(UpdateFollowRequest $request, Follow $follow)
+    public function update(UpdateRequest $request, Follow $follow)
     {
         //
     }

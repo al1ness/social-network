@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Comment\StoreCommentRequest;
-use App\Http\Requests\Comment\UpdateCommentRequest;
+use App\Http\Requests\Comment\StoreRequest;
+use App\Http\Requests\Comment\UpdateRequest;
 use App\Models\Chat;
 
 class CommentController extends Controller
@@ -14,7 +14,7 @@ class CommentController extends Controller
         //
     }
 
-    public function store(StoreCommentRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -24,7 +24,7 @@ class CommentController extends Controller
         //
     }
 
-    public function update(UpdateCommentRequest $request, Chat $chat)
+    public function update(UpdateRequest $request, Chat $chat)
     {
         //
     }

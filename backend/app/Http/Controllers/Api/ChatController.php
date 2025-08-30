@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Chat\StoreChatRequest;
-use App\Http\Requests\Chat\UpdateChatRequest;
+use App\Http\Requests\Chat\StoreRequest;
+use App\Http\Requests\Chat\UpdateRequest;
 use App\Models\Chat;
 
 class ChatController extends Controller
@@ -14,7 +14,7 @@ class ChatController extends Controller
         //
     }
 
-    public function store(StoreChatRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -24,7 +24,7 @@ class ChatController extends Controller
         //
     }
 
-    public function update(UpdateChatRequest $request, Chat $chat)
+    public function update(UpdateRequest $request, Chat $chat)
     {
         //
     }

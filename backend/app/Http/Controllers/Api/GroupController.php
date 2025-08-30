@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Group\StoreGroupRequest;
-use App\Http\Requests\Group\UpdateGroupRequest;
+use App\Http\Requests\Group\StoreRequest;
+use App\Http\Requests\Group\UpdateRequest;
 use App\Models\Group;
 
 class GroupController extends Controller
@@ -14,7 +14,7 @@ class GroupController extends Controller
         //
     }
 
-    public function store(StoreGroupRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -24,7 +24,7 @@ class GroupController extends Controller
         //
     }
 
-    public function update(UpdateGroupRequest $request, Group $group)
+    public function update(UpdateRequest $request, Group $group)
     {
         //
     }

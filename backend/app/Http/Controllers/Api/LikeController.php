@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Like\StoreLikeRequest;
-use App\Http\Requests\Like\UpdateLikeRequest;
+use App\Http\Requests\Like\StoreRequest;
+use App\Http\Requests\Like\UpdateRequest;
 use App\Models\Like;
 
 class LikeController extends Controller
@@ -14,7 +14,7 @@ class LikeController extends Controller
         //
     }
 
-    public function store(StoreLikeRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -24,7 +24,7 @@ class LikeController extends Controller
         //
     }
 
-    public function update(UpdateLikeRequest $request, Like $like)
+    public function update(UpdateRequest $request, Like $like)
     {
         //
     }

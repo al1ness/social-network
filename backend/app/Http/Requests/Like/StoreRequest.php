@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Message;
+namespace App\Http\Requests\Like;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMessageRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

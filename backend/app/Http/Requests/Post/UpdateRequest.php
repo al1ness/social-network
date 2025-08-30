@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Chat;
+declare(strict_types=1);
+
+namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateChatRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
