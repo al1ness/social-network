@@ -3,34 +3,46 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Group\StoreRequest;
-use App\Http\Requests\Group\UpdateRequest;
+use App\Http\Requests\Api\Group\StoreRequest;
+use App\Http\Requests\Api\Group\UpdateRequest;
+use App\Http\Resources\Group\GroupResource;
 use App\Models\Group;
+use App\Services\GroupService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class GroupController extends Controller
 {
-    public function index()
+    public function index(): array
     {
-        //
+        return GroupResource::collection(Group::all())->resolve();
     }
 
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request): array
     {
-        //
+        $data = $request->validated();
+        $group = Group::create($data);
+        return GroupResource::make($group)->resolve();
     }
 
-    public function show(Group $group)
+    public function show(Group $group): array
     {
-        //
+        return GroupResource::make($group)->resolve();
     }
 
-    public function update(UpdateRequest $request, Group $group)
+    public function update(Group $group, UpdateRequest $request): array
     {
-        //
+        $data = $request->validated();
+        $group = GroupService::update($group, $data);
+        return GroupResource::make($group)->resolve();
     }
 
-    public function destroy(Group $group)
+    public function destroy(Group $group): JsonResponse
     {
-        //
+        $group->delete();
+
+        return response()->json([
+            'message' => 'Group deleted'
+        ], Response::HTTP_OK);
     }
 }

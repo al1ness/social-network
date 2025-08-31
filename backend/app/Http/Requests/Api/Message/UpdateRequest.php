@@ -22,7 +22,10 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'chat_id' => 'required', //
+            'sender_id' => 'required',
+            'body' => 'required|string',
+            'read_at' => '' //
         ];
     }
 }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Models\Post;
+use App\Models\Chat;
 
-class PostService
+class ChatService
 {
     /**
      * Create a new class instance.
@@ -16,9 +16,9 @@ class PostService
         //
     }
 
-    public static function update(Post $post, array $data): Post
+    public static function update(Chat $chat, array $data): Chat
     {
-        $post->update($data);
-        return $post->refresh();
+        $chat->update($data);
+        return $chat->refresh();
     }
 }

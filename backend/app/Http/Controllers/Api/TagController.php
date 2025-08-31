@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Tag\StoreRequest;
+use App\Http\Requests\Api\Tag\UpdateRequest;
 use App\Http\Resources\Tag\TagResource;
 use App\Models\Tag;
+use App\Services\TagService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
@@ -15,34 +18,26 @@ class TagController extends Controller
         return TagResource::collection(Tag::all())->resolve();
     }
 
-    public function store(): JsonResponse
+    public function store(StoreRequest $request): array
     {
-        Tag::create([
-            'title' => 'MostPopularTag',
-            'slug' => 'most_popular_tag'
-        ]);
-
-        return response()->json([
-            'message' => 'Tag created'
-        ], Response::HTTP_OK);
+        $data = $request->validated();
+        $tag = Tag::create($data);
+        return TagResource::make($tag)->resolve();
     }
 
-    public function show(Tag $tag)
+    public function show(Tag $tag): array
     {
         return TagResource::make($tag)->resolve();
     }
 
-    public function update(Tag $tag)
+    public function update(Tag $tag, UpdateRequest $request): array
     {
-        $tag->update([
-            'title' => 'TopTag',
-            'slug' => 'top_tag'
-        ]);
-
+        $data = $request->validated();
+        $tag = TagService::update($tag, $data);
         return TagResource::make($tag)->resolve();
     }
 
-    public function destroy(Tag $tag)
+    public function destroy(Tag $tag): JsonResponse
     {
         $tag->delete();
 

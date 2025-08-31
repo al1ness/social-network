@@ -14,6 +14,12 @@ class GroupResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'owner_id' => $this->owner_id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'avatar_url' => $this->avatar_url,
+        ];
     }
 }

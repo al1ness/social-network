@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Follow;
+namespace App\Http\Resources\Chat;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FollowResource extends JsonResource
+class ChatResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,8 +16,8 @@ class FollowResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'follower_id' => $this->follower_id,
-            'following_id' => $this->following_id
+            'title' => $this->title,
+            'status' => $this->status
         ];
     }
 }
