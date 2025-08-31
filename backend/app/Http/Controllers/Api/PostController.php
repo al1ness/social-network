@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use App\Services\PostService;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Post\StoreRequest;
+use App\Http\Requests\Api\Post\UpdateRequest;
+use App\Http\Resources\Post\PostResource;
 
 class PostController extends Controller
 {
@@ -17,15 +20,11 @@ class PostController extends Controller
         return PostResource::collection(Post::all())->resolve();
     }
 
-    public function store(): JsonResponse
+    public function store(StoreRequest $request): array
     {
-        Post::create([
-            'title' => 'New Post'
-        ]);
-
-        return response()->json([
-            'message' => 'New post created'
-        ], Response::HTTP_OK);
+        $data = $request->validated();
+        $post = Post::create($data);
+        return PostResource::make($post)->resolve();
     }
 
     public function show(Post $post): array
@@ -33,12 +32,10 @@ class PostController extends Controller
         return PostResource::make($post)->resolve();
     }
 
-    public function update(Post $post): array
+    public function update(Post $post, UpdateRequest $request): array
     {
-        $post->update([
-            'title' => 'Over New Post'
-        ]);
-
+        $data = $request->validated();
+        $post = PostService::update($post, $data);
         return PostResource::make($post)->resolve();
     }
 

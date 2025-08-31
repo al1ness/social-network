@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Comment;
+namespace App\Http\Requests\Api\Like;
 
 use Illuminate\Foundation\Http\FormRequest;
 

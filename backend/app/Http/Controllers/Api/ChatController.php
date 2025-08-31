@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Chat\StoreRequest;
-use App\Http\Requests\Chat\UpdateRequest;
+use App\Http\Requests\Api\Chat\StoreRequest;
+use App\Http\Requests\Api\Chat\UpdateRequest;
 use App\Models\Chat;
 
 class ChatController extends Controller

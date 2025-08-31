@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Tag;
+namespace App\Http\Requests\Api\Follow;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('title');
             $table->string('image_url')->nullable();
             $table->string('video_url')->nullable();
-            $table->text('body')->nullable();
+            $table->text('body');
             $table->dateTime('published_at')->nullable();
             $table->unsignedBigInteger('views')->default(0);
             $table->unsignedSmallInteger('status')->default(0);
