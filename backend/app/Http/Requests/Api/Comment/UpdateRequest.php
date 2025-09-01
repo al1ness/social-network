@@ -22,7 +22,10 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'body' => 'required|string' // $this->comment->id
+            'user_id' => 'required|integer|exists:users,id',
+            'post_id' => 'required|integer|exists:posts,id',
+            'parent_id' => 'nullable|integer|exists:comments,id',
+            'body' => 'required|string|max:100'
         ];
     }
 }

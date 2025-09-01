@@ -22,7 +22,8 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'follower_id' => 'required|integer|exists:users,id',
+            'following_id' => 'required|integer|exists:users,id'
         ];
     }
 }

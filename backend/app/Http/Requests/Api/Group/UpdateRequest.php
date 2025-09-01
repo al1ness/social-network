@@ -22,7 +22,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'owner_id' => 'required', //??
+            'owner_id' => 'required|integer|exists:users,id',
             'title' => 'required|string|unique:groups,title',
             'description' => 'nullable|string',
             'avatar_url' => 'nullable|string',

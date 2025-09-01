@@ -22,10 +22,10 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'chat_id' => 'required', //
-            'sender_id' => 'required',
-            'body' => 'required|string',
-            'read_at' => '' //
+            'chat_id' => 'required|integer|exists:chats,id',
+            'sender_id' => 'required|integer|exists:users,id',
+            'body' => 'required|string|max:2000',
+            'read_at' => 'nullable|date_format:H:i'
         ];
     }
 }
