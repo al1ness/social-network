@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->unsignedSmallInteger('status')->default(0); //private or group
             $table->timestamps();
+
+            $table->fullText('title');
         });
     }
 

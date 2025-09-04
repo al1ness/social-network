@@ -11,19 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chat_users', function (Blueprint $table) {
+        Schema::create('chat_user', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('chat_id')
-                ->constrained(table: 'chats')
-                ->onDelete('cascade');
-
-            $table->foreignId('user_id')
-                ->constrained(table: 'users')
-                ->onDelete('cascade');
-
+            $table->foreignId('chat_id')->index()->constrained(table: 'chats')->onDelete('cascade');
+            $table->foreignId('user_id')->index()->constrained(table: 'users')->onDelete('cascade');
             $table->timestamps();
-            $table->unique(['chat_id', 'user_id']);
         });
     }
 

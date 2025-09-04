@@ -13,12 +13,7 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('owner_id')
-                ->constrained(table: 'users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
+            $table->foreignId('owner_id')->index()->constrained(table: 'users')->onUpdate('cascade')->index()->onDelete('cascade');
             $table->string('title')->unique();
             $table->mediumtext('description')->nullable();
             $table->string('avatar_url')->nullable();
