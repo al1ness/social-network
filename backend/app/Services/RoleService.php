@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Models\Tag;
+use App\Models\Role;
 
-class TagService
+class RoleService
 {
     /**
      * Create a new class instance.
@@ -16,9 +16,9 @@ class TagService
         //
     }
 
-    public static function update(Tag $tag, array $data): Tag
+    public static function update(Role $role, array $data): Role
     {
-        $tag->update($data);
-        return $tag->refresh();
+        $role->update($data);
+        return $role->refresh();
     }
 }
