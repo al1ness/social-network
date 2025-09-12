@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('profile_id')->index()->constrained(table: 'profiles')->onDelete('cascade');
+            $table->foreignId('profile_id')->index()->constrained(table: 'profiles');
             $table->foreignId('category_id')->index()->nullable()->constrained(table: 'categories');
             $table->text('title');
             $table->string('image_url')->nullable();
@@ -22,6 +22,7 @@ return new class extends Migration
             $table->dateTime('published_at')->index()->nullable();
             $table->unsignedBigInteger('views')->default(0);
             $table->unsignedSmallInteger('status')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

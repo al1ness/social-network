@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->unsignedSmallInteger('status')->default(0); //private or group
+            $table->softDeletes();
             $table->timestamps();
 
             $table->fullText('title');

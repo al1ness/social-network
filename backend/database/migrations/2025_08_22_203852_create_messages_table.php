@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('chat_id')->index()->constrained(table: 'chats')->onDelete('cascade');
-            $table->foreignId('sender_id')->index()->constrained(table: 'profiles')->onDelete('cascade');
+            $table->foreignId('chat_id')->index()->constrained(table: 'chats');
+            $table->foreignId('sender_id')->index()->constrained(table: 'profiles');
             $table->text('body');
             $table->timestamp('read_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

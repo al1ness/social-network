@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('owner_id')->index()->constrained(table: 'profiles')->onUpdate('cascade')->index()->onDelete('cascade');
+            $table->foreignId('owner_id')->index()->constrained(table: 'profiles');
             $table->string('title')->unique();
             $table->mediumtext('description')->nullable();
             $table->string('avatar_url')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->fullText('title');
