@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Profile extends Model
 {
+    use HasFactory, SoftDeletes;
+
     protected $guarded = false;
 
     public function user(): BelongsTo
@@ -41,14 +45,14 @@ class Profile extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function follows(): HasMany
+    public function followings(): BelongsToMany
     {
-        return $this->hasMany(Follow::class, 'follower_id');
+        return $this->belongsToMany(Follow::class, 'follows', 'follower_id', 'following_id');
     }
 
-    public function followers(): HasMany
+    public function followers(): BelongsToMany
     {
-        return $this->hasMany(Follow::class, 'following_id');
+        return $this->belongsToMany(Profile::class, 'follows', 'following_id', 'follower_id');
     }
 
     public function groups(): HasMany
