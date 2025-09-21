@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Profile extends Model
@@ -20,14 +22,14 @@ class Profile extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function image(): MorphOne
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
-    }
-
-    public function likes(): HasMany
-    {
-        return $this->hasMany(Like::class);
     }
 
     public function comments(): HasMany
@@ -45,14 +47,14 @@ class Profile extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function followings(): BelongsToMany
+    public function followers(): HasMany
     {
-        return $this->belongsToMany(Follow::class, 'follows', 'follower_id', 'following_id');
+        return $this->hasMany(Follow::class, 'following_id');
     }
 
-    public function followers(): BelongsToMany
+    public function followings(): HasMany
     {
-        return $this->belongsToMany(Profile::class, 'follows', 'following_id', 'follower_id');
+        return $this->hasMany(Follow::class, 'follower_id');
     }
 
     public function groups(): HasMany
@@ -60,8 +62,13 @@ class Profile extends Model
         return $this->hasMany(Group::class);
     }
 
-    public function tags(): BelongsToMany
+    public function likedPosts()
     {
-        return $this->belongsToMany(Tag::class, 'profile_tag');
+        return $this->morphedByMany(Post::class, 'likeable');
+    }
+
+    public function likedVideos()
+    {
+        return $this->morphedByMany(Video::class, 'likeable');
     }
 }

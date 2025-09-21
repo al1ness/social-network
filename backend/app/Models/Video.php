@@ -4,20 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Comment extends Model
+class Video extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = false;
 
-    public function commentable(): MorphTo
+    public function tags(): MorphToMany
     {
-        return $this->morphTo();
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     public function views(): MorphMany
@@ -25,13 +24,13 @@ class Comment extends Model
         return $this->morphMany(View::class, 'viewable');
     }
 
-    public function profile(): BelongsTo
+    public function likes(): MorphToMany
     {
-        return $this->belongsTo(Profile::class);
+        return $this->morphToMany(Like::class, 'likeable');
     }
 
-    public function category(): BelongsTo
+    public function comments(): MorphMany
     {
-        return $this->post->category();
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

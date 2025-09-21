@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tag extends Model
@@ -13,13 +14,13 @@ class Tag extends Model
 
     protected $guarded = false;
 
-    public function posts(): BelongsToMany
+    public function taggedPosts(): MorphToMany
     {
-        return $this->belongsToMany(Post::class, 'post_tag');
+        return $this->morphedByMany(Post::class, 'taggable');
     }
 
-    public function profiles(): BelongsToMany
+    public function taggedVideos(): MorphToMany
     {
-        return $this->belongsToMany(Profile::class, 'profile_tag');
+        return $this->morphedByMany(Video::class, 'taggable');
     }
 }

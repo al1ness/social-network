@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
@@ -26,18 +28,33 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function tags(): BelongsToMany
+    public function tags(): MorphToMany
     {
-        return $this->belongsToMany(Tag::class, 'post_tag');
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
-    public function likes(): MorphMany
+    public function files(): MorphMany
     {
-        return $this->morphMany(Like::class, 'likeable');
+        return $this->morphMany(File::class, 'fileable');
     }
 
-    public function comments(): HasMany
+    public function image(): MorphOne
     {
-        return $this->hasMany(Comment::class);
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function likes(): MorphToMany
+    {
+        return $this->morphToMany(Like::class, 'likeable');
+    }
+
+    public function views(): MorphMany
+    {
+        return $this->morphMany(View::class, 'viewable');
+    }
+
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }
