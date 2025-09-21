@@ -14,12 +14,10 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
-            $table->string('slug')->unique();
             $table->softDeletes();
             $table->timestamps();
 
             $table->fullText('title');
-            $table->fullText('slug');
         });
     }
 

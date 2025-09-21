@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('chat_id')->index()->constrained(table: 'chats');
             $table->foreignId('profile_id')->index()->constrained(table: 'profiles');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->unique(['chat_id', 'profile_id']);

@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('role_user', function (Blueprint $table) {
+        Schema::create('group_profile', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('role_id')->index()->constrained(table: 'roles');
-            $table->foreignId('user_id')->index()->constrained(table: 'users');
+            $table->foreignId('group_id')->index()->constrained('groups');
+            $table->foreignId('profile_id')->index()->constrained('profiles');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->unique('profile_id', 'group_id');
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('role_user');
+        Schema::dropIfExists('group_profile');
     }
 };
