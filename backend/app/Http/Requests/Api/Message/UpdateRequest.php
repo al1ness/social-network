@@ -23,7 +23,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'chat_id' => 'required|integer|exists:chats,id',
-            'sender_id' => 'required|integer|exists:users,id',
+            'sender_id' => 'required|integer|exists:profiles,id',
             'body' => 'required|string|max:2000',
             'read_at' => 'nullable|date_format:H:i'
         ];
