@@ -20,7 +20,7 @@ class LikeFactory extends Factory
     {
         return [
             'profile_id' => Profile::inRandomOrder()->first()->id,
-            'likeable_type' => null,
+            'likeable_type' => Post::class,
             'likeable_id' => Post::inRandomOrder()->first()->id
         ];
     }

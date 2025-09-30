@@ -20,7 +20,8 @@ class CommentFactory extends Factory
     {
         return [
             'profile_id' => Profile::inRandomOrder()->first()->id,
-            'post_id' => Post::inRandomOrder()->first()->id,
+            'commentable_type' => Post::class,
+            'commentable_id' => Post::inRandomOrder()->first()->id,
             'parent_id' => null,
             'body' => fake()->realTextBetween(10, 120)
         ];
