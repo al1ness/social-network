@@ -24,6 +24,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'profile_id' => 'required|integer|exists:profiles,id',
+            'category_id' => 'required|integer|exists:categories,id',
             'title' => 'required|string',
             'image_url' => 'nullable|string',
             'video_url' => 'nullable|string',
