@@ -23,7 +23,6 @@ class UpdateRequest extends FormRequest
     {
         return [
             'title' => 'required|string|unique:tags,title', //$this->tag->id
-            'slug' => 'required|string|unique:tags,slug'
         ];
     }
 }

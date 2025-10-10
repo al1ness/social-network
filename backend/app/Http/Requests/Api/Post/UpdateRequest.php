@@ -27,10 +27,9 @@ class UpdateRequest extends FormRequest
             'profile_id' => 'required|integer|exists:profiles,id',
             'category_id' => 'required|integer|exists:categories,id',
             'title' => 'required|string',
-            'image_url' => 'nullable|string',
-            'video_url' => 'nullable|string',
             'body' => 'required|string',
             'published_at' => 'nullable|date_format:Y-m-d',
+            'views' => 'nullable|integer',
             'status' => 'nullable|integer'
         ];
     }

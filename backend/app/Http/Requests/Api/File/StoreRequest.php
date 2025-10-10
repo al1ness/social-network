@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Follow;
+namespace App\Http\Requests\Api\File;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,8 +22,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'follower_id' => 'required|integer|exists:profiles,id',
-            'following_id' => 'required|integer|exists:profiles,id'
+            'profile_id' => 'required|integer|exists:profiles,id',
+            'fileable_type' => 'required|string',
+            'fileable_id' => 'required|string'
         ];
     }
 }

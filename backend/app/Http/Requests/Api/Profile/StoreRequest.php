@@ -11,7 +11,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,6 +22,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => 'nullable|string',
             'user_id' => 'required|integer|exists:users,id',
             'avatar_url' => 'nullable|string',
             'phone' => 'nullable|string',

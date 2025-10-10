@@ -25,7 +25,8 @@ class UpdateRequest extends FormRequest
             'profile_id' => 'required|integer|exists:profiles,id',
             'post_id' => 'required|integer|exists:posts,id',
             'parent_id' => 'nullable|integer|exists:comments,id',
-            'body' => 'required|string|max:100'
+            'body' => 'required|string|max:100',
+            'published_at' => 'nullable|date_format:H:i',
         ];
     }
 }

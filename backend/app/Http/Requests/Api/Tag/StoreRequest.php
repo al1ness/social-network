@@ -23,7 +23,6 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string|unique:tags,title',
-            'slug' => 'required|string|unique:tags,slug'
         ];
     }
 }

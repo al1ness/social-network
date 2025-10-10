@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Follow;
+namespace App\Http\Requests\Api\Message;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class IndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'follower_id' => 'required|integer|exists:profiles,id',
-            'following_id' => 'required|integer|exists:profiles,id'
+            'chat_title' => 'nullable|string',
+            'sender_name' => 'nullable|string',
+            'message_status' => 'nullable|string|in:read,unread'
         ];
     }
 }
