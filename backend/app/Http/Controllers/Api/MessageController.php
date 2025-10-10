@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Message\IndexRequest;
 use App\Http\Requests\Api\Message\StoreRequest;
 use App\Http\Requests\Api\Message\UpdateRequest;
 use App\Http\Resources\Message\MessageResource;
@@ -15,15 +16,21 @@ use Illuminate\Http\Response;
 
 class MessageController extends Controller
 {
-    public function index(): array
+    public function index(IndexRequest $request): array
     {
-        return MessageResource::collection(Message::all())->resolve();
+        $data = $request->validated();
+
+        $messages = Message::filter($data)->get();
+
+        return MessageResource::collection($messages)->resolve();
     }
 
     public function store(StoreRequest $request): array
     {
         $data = $request->validated();
+
         $message = Message::create($data);
+
         return MessageResource::make($message)->resolve();
     }
 
@@ -35,7 +42,9 @@ class MessageController extends Controller
     public function update(Message $message, UpdateRequest $request): array
     {
         $data = $request->validated();
+
         $message = MessageService::update($message, $data);
+
         return MessageResource::make($message)->resolve();
     }
 

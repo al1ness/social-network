@@ -22,7 +22,9 @@ class FollowController extends Controller
     public function store(StoreRequest $request): array
     {
         $data = $request->validated();
+
         $follow = Follow::create($data);
+
         return FollowResource::make($follow)->resolve();
     }
 

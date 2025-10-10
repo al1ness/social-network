@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Group\IndexRequest;
 use App\Http\Requests\Api\Group\StoreRequest;
 use App\Http\Requests\Api\Group\UpdateRequest;
 use App\Http\Resources\Group\GroupResource;
@@ -15,15 +16,21 @@ use Illuminate\Http\Response;
 
 class GroupController extends Controller
 {
-    public function index(): array
+    public function index(IndexRequest $request): array
     {
-        return GroupResource::collection(Group::all())->resolve();
+        $data = $request->validated();
+
+        $groups = Group::filter($data)->get();
+
+        return GroupResource::collection($groups)->resolve();
     }
 
     public function store(StoreRequest $request): array
     {
         $data = $request->validated();
+
         $group = Group::create($data);
+
         return GroupResource::make($group)->resolve();
     }
 
@@ -35,7 +42,9 @@ class GroupController extends Controller
     public function update(Group $group, UpdateRequest $request): array
     {
         $data = $request->validated();
+
         $group = GroupService::update($group, $data);
+
         return GroupResource::make($group)->resolve();
     }
 

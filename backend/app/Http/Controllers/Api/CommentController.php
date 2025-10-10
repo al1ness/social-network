@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Comment\IndexRequest;
 use App\Http\Requests\Api\Comment\StoreRequest;
 use App\Http\Requests\Api\Comment\UpdateRequest;
 use App\Http\Resources\Comment\CommentResource;
@@ -15,15 +16,21 @@ use Illuminate\Http\Response;
 
 class CommentController extends Controller
 {
-    public function index(): array
+    public function index(IndexRequest $request): array
     {
-        return CommentResource::collection(Comment::all())->resolve();
+        $data = $request->validated();
+
+        $comments = Comment::filter($data)->get();
+
+        return CommentResource::collection($comments)->resolve();
     }
 
     public function store(StoreRequest $request): array
     {
         $data = $request->validated();
+
         $comment = Comment::create($data);
+
         return CommentResource::make($comment)->resolve();
     }
 
@@ -35,7 +42,9 @@ class CommentController extends Controller
     public function update(Comment $comment, UpdateRequest $request): array
     {
         $data = $request->validated();
+
         $comment = CommentService::update($comment, $data);
+
         return CommentResource::make($comment)->resolve();
     }
 

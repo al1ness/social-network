@@ -23,7 +23,9 @@ class RoleController extends Controller
     public function store(StoreRequest $request): array
     {
         $data = $request->validated();
+
         $role = Role::create($data);
+
         return RoleResource::make($role)->resolve();
     }
 
@@ -35,7 +37,9 @@ class RoleController extends Controller
     public function update(Role $role, UpdateRequest $request): array
     {
         $data = $request->validated();
+
         $role = RoleService::update($role, $data);
+
         return RoleResource::make($role)->resolve();
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Category\IndexRequest;
 use App\Http\Requests\Api\Category\StoreRequest;
 use App\Http\Requests\Api\Category\UpdateRequest;
 use App\Http\Resources\Category\CategoryResource;
@@ -16,15 +17,21 @@ use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
-    public function index(): array
+    public function index(IndexRequest $request): array
     {
-        return CategoryResource::collection(Category::all())->resolve();
+        $data = $request->validated();
+
+        $categories = Category::filter($data)->get();
+
+        return CategoryResource::collection($categories)->resolve();
     }
 
     public function store(StoreRequest $request): array
     {
         $data = $request->validated();
+
         $category = Category::create($data);
+
         return CategoryResource::make($category)->resolve();
     }
 
@@ -36,7 +43,9 @@ class CategoryController extends Controller
     public function update(Category $category, UpdateRequest $request): array
     {
         $data = $request->validated();
+
         $category = CategoryService::update($category, $data);
+
         return CategoryResource::make($category)->resolve();
     }
 
