@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
-            $table->string('model_name');
-            $table->string('event_name');
+            $table->string('model');
+            $table->string('event');
             $table->json('old_fields')->nullable();
             $table->json('new_fields')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
-            $table->index(['model_name', 'created_at']);
-            $table->index('event_name');
+            $table->index(['model', 'created_at']);
+            $table->index('event');
         });
     }
 

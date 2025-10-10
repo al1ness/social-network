@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('follows', function (Blueprint $table) {
+        Schema::create('permission_role', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('follower_id')->index()->constrained('profiles');
-            $table->foreignId('following_id')->index()->constrained('profiles');
-            $table->softDeletes();
+            $table->foreignId('permission_id')->index()->constrained('permissions');
+            $table->foreignId('role_id')->index()->constrained('roles');
             $table->timestamps();
-            $table->unique(['follower_id', 'following_id']);
         });
     }
 
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('follows');
+        Schema::dropIfExists('permission_role');
     }
 };

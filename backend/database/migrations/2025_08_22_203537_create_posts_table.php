@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('profile_id')->index()->constrained(table: 'profiles');
-            $table->foreignId('category_id')->index()->nullable()->constrained(table: 'categories');
+            $table->foreignId('profile_id')->index()->constrained('profiles');
+            $table->foreignId('category_id')->index()->nullable()->constrained('categories');
             $table->text('title');
-            $table->string('image_url')->nullable();
-            $table->string('video_url')->nullable();
             $table->text('body');
             $table->dateTime('published_at')->index()->nullable();
             $table->unsignedBigInteger('views')->default(0);
