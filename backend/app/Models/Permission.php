@@ -2,22 +2,20 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class View extends Model
+class Permission extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use HasFilter;
 
     protected $guarded = false;
 
-    public function viewable(): MorphTo
+    public function roles(): BelongsToMany
     {
-        return $this->morphTo();
+        return $this->belongsToMany(Role::class);
     }
 }

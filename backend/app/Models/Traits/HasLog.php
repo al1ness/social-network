@@ -5,20 +5,21 @@ declare(strict_types=1);
 namespace App\Models\Traits;
 
 use App\Models\Log;
+use Illuminate\Database\Eloquent\Model;
 
 trait HasLog
 {
     public static function bootHasLog(): void
     {
-        static::created(function ($model) {
+        static::created(function (Model $model) {
             Log::create([
-                'model_name' => get_class($model),
-                'event_name' => 'created',
+                'model' => get_class($model),
+                'event' => 'created',
                 'new_fields' => json_encode($model->getDirty(), JSON_UNESCAPED_UNICODE)
             ]);
         });
 
-        static::updated(function ($model) {
+        static::updated(function (Model $model) {
             $newFields = $model->getDirty();
             $oldFields = [];
 
@@ -27,25 +28,25 @@ trait HasLog
             }
 
             Log::create([
-                'model_name' => get_class($model),
-                'event_name' => 'updated',
+                'model' => get_class($model),
+                'event' => 'updated',
                 'old_fields' => json_encode($oldFields, JSON_UNESCAPED_UNICODE),
                 'new_fields' => json_encode($newFields, JSON_UNESCAPED_UNICODE)
             ]);
         });
 
-        static::deleted(function ($model) {
+        static::deleted(function (Model $model) {
             Log::create([
-                'model_name' => get_class($model),
-                'event_name' => 'deleted',
+                'model' => get_class($model),
+                'event' => 'deleted',
             ]);
         });
 
-        static::retrieved(function ($model) {
+        static::retrieved(function (Model $model) {
             if (!app()->runningInConsole()) {
                 Log::create([
-                    'model_name' => get_class($model),
-                    'event_name' => 'retrieved',
+                    'model' => get_class($model),
+                    'event' => 'retrieved',
                 ]);
             }
         });

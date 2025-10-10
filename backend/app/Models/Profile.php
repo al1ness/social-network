@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,7 +14,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Profile extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
+    use HasFilter;
 
     protected $guarded = false;
 
