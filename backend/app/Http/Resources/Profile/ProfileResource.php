@@ -20,7 +20,7 @@ class ProfileResource extends JsonResource
             'avatar_url' => $this->avatar_url,
             'phone' => $this->phone,
             'birthdate' => $this->birthdate,
-            'location' => $this->location,
+            'location' => $this->location
         ];
     }
 }

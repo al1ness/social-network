@@ -22,6 +22,9 @@ class PostResource extends JsonResource
             'category_id' => $this->category_id,
             'title' => $this->title,
             'body' => $this->body,
+            'published_at' => $this->published_at,
+            'views' => $this->views,
+            'status' => $this->status
         ];
     }
 }
