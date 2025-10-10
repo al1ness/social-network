@@ -24,7 +24,6 @@ class ProfileFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'birthdate' => fake()->date(),
             'location' => fake()->city(),
-            'social_links' => null,
         ];
     }
 }

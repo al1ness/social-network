@@ -22,8 +22,6 @@ class PostFactory extends Factory
             'profile_id' => Profile::inRandomOrder()->first()->id,
             'category_id' => Category::inRandomOrder()->first()->id,
             'title' => fake()->realTextBetween(30, 100),
-            'image_url' => fake()->url(),
-            'video_url' => fake()->url(),
             'body' => fake()->realTextBetween(150, 500),
             'published_at' => fake()->dateTime(),
             'views' => fake()->numberBetween(10, 5000),

@@ -23,7 +23,8 @@ class CommentFactory extends Factory
             'commentable_type' => Post::class,
             'commentable_id' => Post::inRandomOrder()->first()->id,
             'parent_id' => null,
-            'body' => fake()->realTextBetween(10, 120)
+            'body' => fake()->realTextBetween(10, 120),
+            'published_at' => fake()->dateTime()
         ];
     }
 }
