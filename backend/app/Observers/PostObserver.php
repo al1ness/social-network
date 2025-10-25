@@ -13,8 +13,8 @@ class PostObserver
     public function created(Post $post): void
     {
         Log::create([
-            'model_name' => Post::class,
-            'event_name' => "Create post id-{$post->id}",
+            'model' => Post::class,
+            'event' => "Create post id-{$post->id}",
             'new_fields' => json_encode($post->getDirty(), JSON_UNESCAPED_UNICODE)
         ]);
     }
@@ -32,8 +32,8 @@ class PostObserver
         }
 
         Log::create([
-            'model_name' => Post::class,
-            'event_name' => "Updated post id-{$post->id}",
+            'model' => Post::class,
+            'event' => "Updated post id-{$post->id}",
             'old_fields' => json_encode($oldValues, JSON_UNESCAPED_UNICODE),
             'new_fields' => json_encode($dirtyFields, JSON_UNESCAPED_UNICODE)
         ]);
@@ -45,8 +45,8 @@ class PostObserver
     public function deleted(Post $post): void
     {
         Log::create([
-            'model_name' => Post::class,
-            'event_name' => "Delete post id-{$post->id}"
+            'model' => Post::class,
+            'event' => "Delete post id-{$post->id}"
         ]);
     }
 
@@ -56,8 +56,8 @@ class PostObserver
     public function retrieved(Post $post): void
     {
         Log::create([
-            'model_name' => Post::class,
-            'event_name' => "Retrieved post id-{$post->id}"
+            'model' => Post::class,
+            'event' => "Retrieved post id-{$post->id}"
         ]);
     }
 }
