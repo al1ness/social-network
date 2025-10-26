@@ -17,4 +17,11 @@ class CommentController extends Controller
 
         return inertia('Admin/Comment/Index', compact('comments'));
     }
+
+    public function show(Comment $comment)
+    {
+        $comment = CommentResource::make($comment)->resolve();
+
+        return inertia('Admin/Comment/Show', compact('comment'));
+    }
 }

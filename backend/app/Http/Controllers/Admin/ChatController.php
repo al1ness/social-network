@@ -17,4 +17,12 @@ class ChatController extends Controller
 
         return inertia('Admin/Chat/Index', compact('chats'));
     }
+
+    public function show(Chat $chat)
+    {
+        $chat = ChatResource::make($chat)->resolve();
+
+        return inertia('Admin/Chat/Show', compact('chat'));
+    }
 }
+

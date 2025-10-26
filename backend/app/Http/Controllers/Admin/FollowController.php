@@ -17,4 +17,11 @@ class FollowController extends Controller
 
         return inertia('Admin/Follow/Index', compact('follows'));
     }
+
+    public function show(Follow $follow)
+    {
+        $follow = FollowResource::make($follow)->resolve();
+
+        return inertia('Admin/Follow/Show', compact('follow'));
+    }
 }

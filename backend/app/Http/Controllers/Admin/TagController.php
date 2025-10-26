@@ -17,4 +17,11 @@ class TagController extends Controller
 
         return inertia('Admin/Tag/Index', compact('tags'));
     }
+
+    public function show(Tag $tag)
+    {
+        $tag = TagResource::make($tag)->resolve();
+
+        return inertia('Admin/Tag/Show', compact('tag'));
+    }
 }

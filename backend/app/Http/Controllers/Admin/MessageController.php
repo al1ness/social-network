@@ -17,4 +17,11 @@ class MessageController extends Controller
 
         return inertia('Admin/Message/Index', compact('messages'));
     }
+
+    public function show(Message $message)
+    {
+        $message = MessageResource::make($message)->resolve();
+
+        return inertia('Admin/Message/Show', compact('message'));
+    }
 }

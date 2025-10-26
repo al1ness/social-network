@@ -17,4 +17,11 @@ class GroupController extends Controller
 
         return inertia('Admin/Group/Index', compact('groups'));
     }
+
+    public function show(Group $group)
+    {
+        $group = GroupResource::make($group)->resolve();
+
+        return inertia('Admin/Group/Show', compact('group'));
+    }
 }

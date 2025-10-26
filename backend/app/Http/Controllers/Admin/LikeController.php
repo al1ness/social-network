@@ -17,4 +17,10 @@ class LikeController extends Controller
 
         return inertia('Admin/Like/Index', compact('likes'));
     }
+
+    public function show(Like $like)
+    {
+        $like = LikeResource::make($like)->resolve();
+        return inertia('Admin/Like/Show', compact('like'));
+    }
 }

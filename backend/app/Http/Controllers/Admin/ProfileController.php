@@ -17,4 +17,11 @@ class ProfileController extends Controller
 
         return inertia('Admin/Profile/Index', compact('profiles'));
     }
+
+    public function show(Profile $profile)
+    {
+        $profile = ProfileResource::make($profile)->resolve();
+
+        return inertia('Admin/Profile/Show', compact('profile'));
+    }
 }

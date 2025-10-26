@@ -14,7 +14,6 @@ use App\Services\CategoryService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
-
 class CategoryController extends Controller
 {
     public function index(IndexRequest $request): array

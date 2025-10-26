@@ -21,6 +21,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $post = PostResource::make($post)->resolve();
+
         return inertia('Admin/Post/Show', compact('post'));
     }
 }
