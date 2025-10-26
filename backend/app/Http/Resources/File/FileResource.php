@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Like;
+namespace App\Http\Resources\File;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LikeResource extends JsonResource
+class FileResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +17,9 @@ class LikeResource extends JsonResource
         return [
             'id' => $this->id,
             'profile_id' => $this->profile_id,
-            'likeable_type' => $this->likeable_type,
-            'likeable_id' => $this->likeable_id
+            'fileable_type' => $this->fileable_type,
+            'fileable_id' => $this->fileable_id,
+            'name' => $this->name
         ];
     }
 }
