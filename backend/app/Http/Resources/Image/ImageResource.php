@@ -4,6 +4,7 @@ namespace App\Http\Resources\Image;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class ImageResource extends JsonResource
 {
@@ -16,9 +17,7 @@ class ImageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'path' => $this->path,
-            'imageable_type' => $this->imageable_type,
-            'imageable_id' => $this->imageable_id
+            'file_url' => Storage::disk('s3')->url($this->file_path),
         ];
     }
 }
