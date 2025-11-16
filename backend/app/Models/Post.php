@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 //#[ObservedBy(PostObserver::class)]
 class Post extends Model
@@ -44,9 +45,9 @@ class Post extends Model
         return $this->morphMany(File::class, 'fileable');
     }
 
-    public function image(): MorphOne
+    public function images(): MorphMany
     {
-        return $this->morphOne(Image::class, 'imageable');
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     public function likes(): MorphToMany
@@ -62,5 +63,15 @@ class Post extends Model
     public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function getImageUrlAttributes(): string
+    {
+        return Storage::disk('public')->url($this->img_path);
+    }
+
+    public function getTagsAsStringAttribute(): string
+    {
+        return implode(',', $this->tags->pluck('title')->toArray());
     }
 }

@@ -16,6 +16,8 @@ class Like extends Model
     use SoftDeletes;
     use HasFilter;
 
+    protected $table = 'likeables';
+
     protected $guarded = false;
 
     public function profile(): BelongsTo

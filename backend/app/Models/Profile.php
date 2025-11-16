@@ -40,6 +40,11 @@ class Profile extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function files(): HasMany
+    {
+        return $this->hasMany(File::class);
+    }
+
     public function chats(): BelongsToMany
     {
         return $this->belongsToMany(Chat::class, 'chat_profile');
