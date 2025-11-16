@@ -8,9 +8,14 @@
     "require": {
         "php": "^8.3",
         "ext-pdo": "*",
+        "inertiajs/inertia-laravel": "^2.0",
+        "laravel/breeze": "^2.3",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
+        "league/flysystem-aws-s3-v3": "^3.30",
+        "league/flysystem-path-prefixing": "^3.28",
+        "tightenco/ziggy": "^2.0",
         "tymon/jwt-auth": "^2.2"
     },
     "require-dev": {
