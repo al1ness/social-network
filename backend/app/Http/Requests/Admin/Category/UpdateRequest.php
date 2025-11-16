@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Chat;
+namespace App\Http\Requests\Admin\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,8 +22,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string',
-            'status' => 'required|integer'
+            'title' => 'required|string|unique:categories,title'
         ];
     }
 }
