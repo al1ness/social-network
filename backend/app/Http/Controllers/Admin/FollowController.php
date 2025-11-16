@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Follow\FollowResource;
 use App\Models\Follow;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class FollowController extends Controller
 {
@@ -23,5 +23,24 @@ class FollowController extends Controller
         $follow = FollowResource::make($follow)->resolve();
 
         return inertia('Admin/Follow/Show', compact('follow'));
+    }
+
+    public function create()
+    {
+
+    }
+
+    public function store()
+    {
+
+    }
+
+    public function destroy(Follow $follow)
+    {
+        $follow->delete();
+
+        return response()->json([
+            'message' => 'Follow deleted successfully'
+        ], Response::HTTP_OK);
     }
 }

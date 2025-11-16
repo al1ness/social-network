@@ -3,17 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Message\IndexRequest;
+use App\Http\Requests\Admin\Message\StoreRequest;
 use App\Http\Resources\Message\MessageResource;
 use App\Models\Message;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Request;
 
 class MessageController extends Controller
 {
-    public function index()
+    public function index(IndexRequest $request)
     {
-        $messages = Message::all();
+        $data = $request->validated();
 
-        $messages = MessageResource::collection($messages)->resolve();
+        $messages = MessageResource::collection(Message::filter($data)->get())->resolve();
+
+        if (Request::wantsJson()) {
+            return $messages;
+        }
 
         return inertia('Admin/Message/Index', compact('messages'));
     }
@@ -23,5 +30,28 @@ class MessageController extends Controller
         $message = MessageResource::make($message)->resolve();
 
         return inertia('Admin/Message/Show', compact('message'));
+    }
+
+    public function create()
+    {
+        return inertia('Admin/Message/Create');
+    }
+
+    public function store(StoreRequest $request)
+    {
+        $data = $request->validated();
+
+        $message = Message::create($data);
+
+        return MessageResource::make($message)->resolve();
+    }
+
+    public function destroy(Message $message)
+    {
+        $message->delete();
+
+        return response()->json([
+            'message' => 'Message deleted successfully'
+        ], Response::HTTP_OK);
     }
 }

@@ -3,17 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Tag\IndexRequest;
+use App\Http\Requests\Admin\Tag\StoreRequest;
 use App\Http\Resources\Tag\TagResource;
 use App\Models\Tag;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Request;
 
 class TagController extends Controller
 {
-    public function index()
+    public function index(IndexRequest $request)
     {
-        $tags = Tag::all();
+        $data = $request->validated();
 
-        $tags = TagResource::collection($tags)->resolve();
+        $tags = TagResource::collection(Tag::filter($data)->get())->resolve();
+
+        if (Request::wantsJson()) {
+            return $tags;
+        }
 
         return inertia('Admin/Tag/Index', compact('tags'));
     }
@@ -23,5 +30,28 @@ class TagController extends Controller
         $tag = TagResource::make($tag)->resolve();
 
         return inertia('Admin/Tag/Show', compact('tag'));
+    }
+
+    public function create()
+    {
+        return inertia('Admin/Tag/Create');
+    }
+
+    public function store(StoreRequest $request)
+    {
+        $data = $request->validated();
+
+        $tag = Tag::create($data);
+
+        return TagResource::make($tag)->resolve();
+    }
+
+    public function destroy(Tag $tag)
+    {
+        $tag->delete();
+
+        return response()->json([
+            'message' => 'Tag deleted successfully'
+        ], Response::HTTP_OK);
     }
 }
