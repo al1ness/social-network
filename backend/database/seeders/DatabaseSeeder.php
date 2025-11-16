@@ -38,7 +38,10 @@ class DatabaseSeeder extends Seeder
             //FollowSeeder::class,
             ChatSeeder::class,
             MessageSeeder::class,
-            GroupSeeder::class
+            GroupSeeder::class,
+            VideoSeeder::class,
+            FileSeeder::class,
+            ImageSeeder::class,
         ]);
     }
 }

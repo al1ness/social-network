@@ -17,7 +17,8 @@ class VideoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence(3),
+            'file_path' => 'videos/'.$this->faker->uuid().'.mp4'
         ];
     }
 }

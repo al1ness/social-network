@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('profile_id')->index()->constrained('profiles');
             $table->morphs('fileable');
+            $table->string('name');
+            $table->string('file_path');
             $table->softDeletes();
             $table->timestamps();
-            $table->unique('profile_id', 'fileable_id');
         });
     }
 
