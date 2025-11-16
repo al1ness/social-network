@@ -7,7 +7,7 @@ namespace App\Http\Filters;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
-class PostFilter
+class PostFilter extends AbstractFilter
 {
     protected array $keys = [
         'category_title',
@@ -18,45 +18,32 @@ class PostFilter
         'views_to'
     ];
 
-    public function apply(Builder $builder, array $data): Builder
-    {
-        foreach ($this->keys as $key) {
-            if (isset($data[$key])) {
-
-                $methodName = Str::camel($key);
-                $this->$methodName($builder, $data[$key]);
-            }
-        }
-
-        return $builder;
-    }
-
-    private function categoryTitle(Builder $builder, $value): void
+    protected function categoryTitle(Builder $builder, $value): void
     {
         $builder->whereRelation('category', 'title', 'ilike', "%$value%");
     }
 
-    private function title(Builder $builder, $value): void
+    protected function title(Builder $builder, $value): void
     {
         $builder->where('title', 'ilike', "%$value%");
     }
 
-    private function publishedAtFrom(Builder $builder, $value): void
+    protected function publishedAtFrom(Builder $builder, $value): void
     {
         $builder->where('published_at', '>=', $value);
     }
 
-    private function publishedAtTo(Builder $builder, $value): void
+    protected function publishedAtTo(Builder $builder, $value): void
     {
         $builder->where('published_at', '<=', $value);
     }
 
-    private function viewsFrom(Builder $builder, $value): void
+    protected function viewsFrom(Builder $builder, $value): void
     {
         $builder->where('views', '>=', $value);
     }
 
-    private function viewsTo(Builder $builder, $value): void
+    protected function viewsTo(Builder $builder, $value): void
     {
         $builder->where('views', '<=', $value);
     }
